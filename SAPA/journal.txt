@@ -1,0 +1,25 @@
+
+cp /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/SAPA2Missing_maptosace.csv /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SACE2Missing_maptosapa.csv
+nano /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SACE2Missing_maptosapa.csv
+YMX507A04
+YMX506A05
+# 03_Mapping 
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA_YPS138.txt -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SACE2Missing_maptosapa.csv
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
+mv javelar_SH_map2ref.sh javelar_SH_map2ref_2Miss2.sh
+bash javelar_SH_map2ref_2Miss2.sh
+
+
+# 06 Genotyping
+qlogin
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA112_NewXA.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -m .1
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_SACE192_XA
+mv get_SACE_SNPmatrix_from_SACE.sge get_SACE_SNPmatrix_from_SACE_SACE192_XA.sge
+vim javelar_SH_getSNPmatrix_SACE192_XA   # cambié el nombre del sge que va a mandar correr TAMBIÉN LA CARPETA OUTPUT!
+vim get_SACE_SNPmatrix_from_SACE_SACE192_XA.sge # cambie output de .err y .out
+bash javelar_SH_getSNPmatrix_SACE192_XA # output en /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/  Lo corri desde lm
