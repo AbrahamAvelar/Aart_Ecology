@@ -41,3 +41,7 @@ vim javelar_SH_getSNPmatrix_SACE192_XA   # cambié el nombre del sge que va a ma
 vim get_SACE_SNPmatrix_from_SACE_SACE192_XA.sge # cambie output de .err y .out
 bash javelar_SH_getSNPmatrix_SACE192_XA # output en /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/  Lo corri desde lm
 
+# ARBOL
+python3.7 vcf2phylip_v28.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA
+qsub RaXML_Phylogenetic_Trees_SACE192_NewXA.sge
