@@ -34,9 +34,7 @@ bash  javelar_SH_vcfOnlychr_SACE2Missing_maptosaPA.sh
 
 
 # 06 Genotyping
-qlogin
 cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
-module load python37/3.7.0
 python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA112_NewXA.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA_YPS138.txt -m .1
 cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
 mv lmorales_SH_getSNPmatrix.sh lmorales_SH_getSNPmatrix_SAPA112_XA.sh
@@ -44,3 +42,13 @@ mv get_SAPA_SNPmatrix_from_SAPA.sge get_SAPA_SNPmatrix_from_SAPA_SAPA112_XA.sge
 vim lmorales_SH_getSNPmatrix_SAPA112_XA.sh   # cambié el nombre del sge que va a mandar correr TAMBIÉN LA CARPETA OUTPUT!
 vim get_SAPA_SNPmatrix_from_SAPA_SAPA112_XA.sge # cambie output de .err y .out
 bash lmorales_SH_getSNPmatrix_SAPA112_XA.sh # output en /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/
+
+# ARBOL
+qlogin
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 vcf2phylip_v28.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_biallelic
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/
+vim RaXML_Phylogenetic_Trees_SAPA112_NewXA.sge # .err .out -o (outgrups) y -s matriz
+qsub RaXML_Phylogenetic_Trees_SAPA112_NewXA.sge
+
