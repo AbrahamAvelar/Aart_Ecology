@@ -45,3 +45,32 @@ bash javelar_SH_getSNPmatrix_SACE192_XA # output en /mnt/Timina/lmorales/Public/
 python3.7 vcf2phylip_v28.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic
 cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA
 qsub RaXML_Phylogenetic_Trees_SACE192_NewXA.sge
+
+
+
+##### AGREGAR FALTANTES  #######
+Sería necesario agregar tres cepas del clado Ecuadorean original de Peter (2018), que incluye muestras geográficamente provenientes de USA y Ecuador:
+YPS1000_1b ACC Exudate from Quercus sp. Tree USA
+CLQCA_20-156 CCC Flower (Gesneriaceae sp.) Flower Yasuni, Orellana
+CLQCA_20-184 CCD Flower from Heliconia sp. Flower Yasuni, Orellana
+
+Agregar 6 cepas del Pacific West Coast de Marr (2023):
+OCP080-2 Pacific West Coast Wine SRR19238679 Marr et al. 2023
+SBV051 Pacific West Coast Wine SRR19238661 Marr et al. 2023
+SBV034 Pacific West Coast Wine SRR19238665 Marr et al. 2023
+SBV015 Pacific West Coast Wine SRR19238670 Marr et al. 2023
+YJM1527 Pacific West Coast Wine SRR800848 Strope et. al 2015
+ZP611 Pacific West Coast Wine ERR1308812 Almeida et. al 2015
+
+Agregar las siguientes cepas del clado Malaysia (Peter 2018):
+UWOPS03-433.3 BMB Nectar, bertam palm Tree Malaysia
+UWOPS03-459.1 BMC Nectar, bertam palm Tree Malaysia
+UWOPS05_227_2 SACE_MAL Telok Senangin, Malaysia, Lachance M, 2005 Trigona spp (Stingless bee) collected near Bertam palm flower Insect Telok Senangin, Malaysia
+
+Agregar cepas del clado Taiwanese (Peter 2018) :
+EN14S01 AMH Soil Soil Sinyi, Nantou, Taiwan
+EM14S01-3B CEG Soil Soil Taiwan
+
+Agregar cepas del clado China I (Peter 2018) :
+HN6 BAL Rotten wood Nature Bawangling Mountain, Hainan province, China
+
