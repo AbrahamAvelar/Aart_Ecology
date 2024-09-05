@@ -52,3 +52,15 @@ cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/
 vim RaXML_Phylogenetic_Trees_SAPA112_NewXA.sge # .err .out -o (outgrups) y -s matriz
 qsub RaXML_Phylogenetic_Trees_SAPA112_NewXA.sge
 
+
+
+###  QUITAR LAS DOS SACE DE OUTGROUP     #########
+
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA110_NewXA.csv -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA_YPS138.txt -m .1
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh  javelar_SH_getSNPmatrix_SAPA110_XA.sh
+mv get_SAPA_SNPmatrix_from_SAPA.sge get_SAPA_SNPmatrix_from_SAPA_SAPA110_XA.sge
+vim javelar_SH_getSNPmatrix_SAPA110_XA.sh   # cambié el nombre del sge que va a mandar correr TAMBIÉN LA CARPETA OUTPUT!
+vim get_SAPA_SNPmatrix_from_SAPA_SAPA110_XA.sge # cambie output de .err y .out
+bash javelar_SH_getSNPmatrix_SAPA110_XA.sh # output en /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/
