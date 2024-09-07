@@ -59,18 +59,34 @@ OCP080-2 Pacific West Coast Wine SRR19238679 Marr et al. 2023
 SBV051 Pacific West Coast Wine SRR19238661 Marr et al. 2023
 SBV034 Pacific West Coast Wine SRR19238665 Marr et al. 2023
 SBV015 Pacific West Coast Wine SRR19238670 Marr et al. 2023
-YJM1527 Pacific West Coast Wine SRR800848 Strope et. al 2015
-ZP611 Pacific West Coast Wine ERR1308812 Almeida et. al 2015
+YJM1527 Pacific West Coast Wine SRR800848 Strope et. al 2015 
+ZP611 Pacific West Coast Wine ERR1308812 Almeida et. al 2015 es JS235c1
+# ya esta UCD_07-780  ERS1082780 JS612c1 CBG Insect Califronia
 
 Agregar las siguientes cepas del clado Malaysia (Peter 2018):
-UWOPS03-433.3 BMB Nectar, bertam palm Tree Malaysia
+UWOPS03-433.3 BMB Nectar, bertam palm Tree Malaysia  JS098c1
 UWOPS03-459.1 BMC Nectar, bertam palm Tree Malaysia
 UWOPS05_227_2 SACE_MAL Telok Senangin, Malaysia, Lachance M, 2005 Trigona spp (Stingless bee) collected near Bertam palm flower Insect Telok Senangin, Malaysia
 
 Agregar cepas del clado Taiwanese (Peter 2018) :
-EN14S01 AMH Soil Soil Sinyi, Nantou, Taiwan
-EM14S01-3B CEG Soil Soil Taiwan
+EN14S01 AMH Soil Soil Sinyi, Nantou, Taiwan  ERR1308682	
+EM14S01-3B CEG Soil Soil Taiwan JS611c1
 
 Agregar cepas del clado China I (Peter 2018) :
-HN6 BAL Rotten wood Nature Bawangling Mountain, Hainan province, China
+HN6 BAL Rotten wood Nature Bawangling Mountain, Hainan province, China  JS418c1
 
+scp C:/Users/HP/Dropbox/Posdoc/Artículo_CELG_Ecology/SACE8_Faltantes_toDownload_XA.csv javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/
+
+# 00_Download
+vim /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE8_Faltantes_toDownload_XA.csv # :set nobomb
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/00_download
+python3.7 download_sra.py -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE8_Faltantes_toDownload_XA.csv
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/00_download
+mv javelar_SH_download_SRA.sh javelar_SH_download_SRA_SACE8_XA.sh
+bash javelar_SH_download_SRA_SACE8_XA.sh
+# 02_Cleaning
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/02_cleaning
+module load python37/3.7.0
+python3.7 clean_fastq.py -s  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE8_Faltantes_toDownload_XA.csv
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/02_cleaning
+bash  javelar_SH_clean_fastq.sh
