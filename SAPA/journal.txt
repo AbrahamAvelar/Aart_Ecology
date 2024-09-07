@@ -67,5 +67,4 @@ bash javelar_SH_getSNPmatrix_SAPA110_XA.sh # output en /mnt/Timina/lmorales/Publ
 
 module load python37/3.7.0
 python3.7 vcf2phylip_v28.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_biallelic
-
-
+ mv /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_biallelic.min4.phy  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/
