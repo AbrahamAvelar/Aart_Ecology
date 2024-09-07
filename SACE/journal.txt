@@ -50,7 +50,7 @@ qsub RaXML_Phylogenetic_Trees_SACE192_NewXA.sge
 
 ##### AGREGAR FALTANTES  #######
 Sería necesario agregar tres cepas del clado Ecuadorean original de Peter (2018), que incluye muestras geográficamente provenientes de USA y Ecuador:
-YPS1000_1b ACC Exudate from Quercus sp. Tree USA
+YPS1000_1b ACC Exudate from Quercus sp. Tree USA ERR1308993
 CLQCA_20-156 CCC Flower (Gesneriaceae sp.) Flower Yasuni, Orellana
 CLQCA_20-184 CCD Flower from Heliconia sp. Flower Yasuni, Orellana
 
