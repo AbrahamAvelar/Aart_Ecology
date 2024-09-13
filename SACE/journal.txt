@@ -127,8 +127,38 @@ bash javelar_SH_vcalling_genotyping_XA.sh
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
 module load python37/3.7.0
-python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -s /mnt/Timina/lmorales/javelar/samplesheets/SACE24_Missing_Alpechin.csv --subgenome SACE
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE8_Faltantes_toDownload_XA.csv --subgenome SACE
 exit
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
-mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SACE24_Missing_Alpechin.sh
-bash javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
+mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychrSACE8_Faltantes_toDownload_XA.sh
+bash javelar_SH_vcfOnlychrSACE8_Faltantes_toDownload_XA.sh
+
+
+# 06 Genotyping
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+mv /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE192_NewXA.csv /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE204_NewXA.csv
+python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/SACE204_NewXA.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -m .1
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_SACE204XA.sh
+mv get_SACE_SNPmatrix_from_SACE.sge get_SACE_SNPmatrix_from_SACE_SACE204XA.sge
+vim javelar_SH_getSNPmatrix_SACE204XA.sh   # cambié el nombre del sge que va a mandar correr TAMBIÉN LA CARPETA OUTPUT!
+vim get_SACE_SNPmatrix_from_SACE_SACE204XA.sge # cambie output de .err y .out
+bash javelar_SH_getSNPmatrix_SACE204XA.sh 
+
+    1  cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping/
+    2  ls
+    3  module load python37/3.7.0
+    4  python vcf2phylip_v28.py /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic
+    5  python vcf2phylip_v28.py -i /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic
+    6  ls
+    7  mv Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic.min4.phy /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/
+    8  cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/
+    9  ls
+   10  mv RaXML_Phylogenetic_Trees_SACE192_NewXA.sge
+   11  vim RaXML_Phylogenetic_Trees_SACE192_NewXA.sge
+   12  mv RaXML_Phylogenetic_Trees_SACE192_NewXA.sge RaXML_Phylogenetic_Trees_SACE204_NewXA.sge
+   13  vim RaXML_Phylogenetic_Trees_SACE204_NewXA.sge
+
+
+ERROR: Sequence SRR800848 consists entirely of undetermined values which will be treated as missing data
+ERROR: Found 1 sequences that consist entirely of undetermined values, exiting...
