@@ -121,3 +121,14 @@ exit
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
 mv  javelar_SH_vcalling_genotyping.sh   javelar_SH_vcalling_genotyping_XA.sh
 bash javelar_SH_vcalling_genotyping_XA.sh
+
+
+# 05_vcalling OnlyChr 17:44-17:55
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -s /mnt/Timina/lmorales/javelar/samplesheets/SACE24_Missing_Alpechin.csv --subgenome SACE
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
+mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SACE24_Missing_Alpechin.sh
+bash javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
