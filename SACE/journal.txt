@@ -162,3 +162,8 @@ bash javelar_SH_getSNPmatrix_SACE204XA.sh
 
 ERROR: Sequence SRR800848 consists entirely of undetermined values which will be treated as missing data
 ERROR: Found 1 sequences that consist entirely of undetermined values, exiting...
+
+
+grep -v SRR800848 Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic.min4.phy > OutputsinSRR800848_SACE203.phy
+sed -i '1s/204/203/' OutputsinSRR800848_SACE203.phy
+qsub RaXML_Phylogenetic_Trees_SACE204_NewXA.sge
