@@ -14,3 +14,26 @@ bash  javelar_admixture_K2-15_S1-10_SACE203.sh
 
 
 grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/All_SACE203/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE421_2.txt
+
+
+## solo las 106 del correo
+
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures
+
+bcftools view -S SACE106/sample_list.txt -o Matrix_SACE203_SubSACE106.vcf -O v Matrix_SACE203.vcf
+bcftools view -v snps Matrix_SACE203_SubSACE106.vcf | grep -v "^#" | wc -l # SON 870190 SNPs
+
+
+qsub  Remove_LD_from_VCF_SACE106.sge /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106/Matrix_SACE203_SubSACE106.vcf 50 5 0.5
+# 749688 of 870190 variants removed.
+# 120502 variants and 106 people pass filters and QC.
+
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/10_admixture
+module load python37/3.7.0 
+python3.7 SendAdmixtureSGEs.py --dirbed /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106 --bed Matrix_LDPrune_50_5_0.5.bed  --out /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106/out --minS 1 --maxS 10 --minK 2 --maxK 15 --setname SACE106
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
+
+bash  javelar_admixture_K2-15_S1-10_SACE106.sh  #  qstat |wc -l # 143
+grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE421_2.txt
