@@ -1,0 +1,20 @@
+/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA110_NewXA.csv
+
+bcftools view -v snps /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_biallelic | grep -v "^#" | wc -l # SON 876358 SNPs
+
+qsub  Remove_LD_from_VCF_SAPA110.sge //mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_biallelic 50 5 0.5
+# 649965 of 876358 variants removed
+# 226393 variants remaining.
+
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/10_admixture
+module load python37/3.7.0 
+python3.7 SendAdmixtureSGEs.py --dirbed /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Admixture --bed Matrix_LDPrune_50_5_0.5.bed  --out /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Admixture/out --minS 1 --maxS 10 --minK 2 --maxK 15 --setname SAPA110
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
+
+bash  javelar_admixture_K2-15_S1-10_SAPA110.sh # wc 142
+
+
+grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Admixture/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE421_2.txt
+
