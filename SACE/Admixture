@@ -51,3 +51,5 @@ grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewX
   done
 
 pong -m Pong_mfile_SACE106.txt  -i ../sample_list.txt -p 5000 #-n ../SACE304.orderPop.txt
+
+pong -m Pong_mfile_SACE106.txt -i sample_list_sort.txt -p 5000 # -n ind2pop.state.sorted.txt
