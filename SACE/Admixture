@@ -37,12 +37,13 @@ cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
 
 bash  javelar_admixture_K2-15_S1-10_SACE106.sh  #  qstat |wc -l # 143
 grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE421_2.txt
+grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE106/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n > Values_CV_SACE106_XA.txt
 
 
   rm Pong_mfile_SACE106.txt
   for seed in {1..10}
   do
-    for k in {2..15}
+    for k in {4..11}
     do
       #echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_S${seed}_K${k}.${k}.Q" >> Pong_mfile_SACE106.txt
       echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_50_5_0.5_S${seed}_K${k}.${k}.Q" >>  Pong_mfile_SACE106.txt
@@ -53,3 +54,5 @@ grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewX
 pong -m Pong_mfile_SACE106.txt  -i ../sample_list.txt -p 5000 #-n ../SACE304.orderPop.txt
 
 pong -m Pong_mfile_SACE106.txt -i sample_list_sort.txt -p 5000 # -n ind2pop.state.sorted.txt
+pong -m Pong_mfile_SACE106.txt -i SACE106_ind2pop_StrainName_State_LocType.csv -n SACE106_ind2pop_StrainName_State_LocType_ORDER.csv -p 5000
+
