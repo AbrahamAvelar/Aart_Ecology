@@ -18,15 +18,18 @@ bash  javelar_admixture_K2-15_S1-10_SAPA110.sh # wc 142
 
 grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/Admixture/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE421_2.txt
 
-  rm Pong_mfile_SAPA110.txt
+  rm Pong_mfile_SAPA110_k6-12.txt
   for seed in {1..10}
   do
-    for k in {2..15}
+    for k in {6..12}
     do
       #echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_S${seed}_K${k}.${k}.Q" >> Pong_mfile_SAPA110.txt
-      echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_50_5_0.5_S${seed}_K${k}.${k}.Q" >>  Pong_mfile_SAPA110.txt
+      echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_50_5_0.5_S${seed}_K${k}.${k}.Q" >>  Pong_mfile_SAPA110_k6-12.txt
       #ls Matrix_LDPrune.35_S${seed}_K${k}.${k}.Q | grep No
     done
   done
 
-pong -m Pong_mfile_SAPA110.txt -i sample.name.SAPA110_NewXA.csv -n sample.name.SAPA110_NewXA_ORDER.csv -p 5000
+pong -m Pong_mfile_SAPA110.txt -i sample.name.SAPA110_NewXA.csv -n sample.name.SAPA110_NewXA_ORDER.csv -p 5000 # este pong_mfile va de 2 a 15, que es todo lo que corrí
+pong -m Pong_mfile_SAPA110_k6-12.txt -i sample.name.SAPA110_NewXA.csv -n sample.name.SAPA110_NewXA_ORDER_sortedByRegion.csv -p 5000
+
+
