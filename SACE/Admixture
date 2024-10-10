@@ -56,3 +56,22 @@ pong -m Pong_mfile_SACE106.txt  -i ../sample_list.txt -p 5000 #-n ../SACE304.ord
 pong -m Pong_mfile_SACE106.txt -i sample_list_sort.txt -p 5000 # -n ind2pop.state.sorted.txt
 pong -m Pong_mfile_SACE106.txt -i SACE106_ind2pop_StrainName_State_LocType.csv -n SACE106_ind2pop_StrainName_State_LocType_ORDER.csv -p 5000
 
+## SACE88 de XA3
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures
+module load bcftools/1.9
+bcftools view -S SACE88/SampleList.txt -o Matrix_SACE203_SubSACE88.vcf -O v Matrix_SACE203.vcf
+bcftools view -v snps Matrix_SACE203_SubSACE88.vcf | grep -v "^#" | wc -l # SON 870190 SNPs
+
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88
+qsub  Remove_LD_from_VCF_SACE88.sge /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88/Matrix_SACE203_SubSACE88.vcf 50 5 0.5
+
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
+module load python37/3.7.0 
+python3.7 SendAdmixtureSGEs.py --dirbed /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88 --bed Matrix_LDPrune_50_5_0.5.bed  --out /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88/out --minS 1 --maxS 10 --minK 2 --maxK 15 --setname SACE88
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
+
+bash  javelar_admixture_K2-15_S1-10_SACE88.sh #  qstat |wc -l # 142
+
+grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SACE106_XA.txt
+
