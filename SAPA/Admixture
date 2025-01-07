@@ -59,3 +59,23 @@ cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixtureSAPA112_NewXA
 bash javelar_admixture_K2-15_S1-10_SAPA47.sh # wc 145
 
 grep -h CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA47/out/log*_50_5_*.out|awk -F "=|:" '{print $2"\t"$3}' | sed 's/)//g'| sort -n #> Values_CV_SAPA47.txt
+
+
+scp -r javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA47/Values_CV_SAPA47.txt ~/Dropbox/Posdoc/Artículo_CELG_Ecology/SAPA47
+
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA47/out
+  rm Pong_mfile_SACE47_k3-6.txt
+  for seed in {1..10}
+  do
+    for k in {3..6}
+    do
+      #echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_S${seed}_K${k}.${k}.Q" >> Pong_mfile_SAPA110.txt
+      echo -e "K${k}s${seed}\t${k}\tMatrix_LDPrune_50_5_0.5_S${seed}_K${k}.${k}.Q" >>  Pong_mfile_SACE47_k3-6.txt
+      #ls Matrix_LDPrune.35_S${seed}_K${k}.${k}.Q | grep No
+    done
+  done
+
+pong -m out/Pong_mfile_SACE47_k3-6.txt -i SAPA47.csv -p 5000
+
+pong -m out/Pong_mfile_SACE47_k3-6.txt -i sample.name.SAPA47.csv -n Ordered.SAPA47.csv -p 5000
+
