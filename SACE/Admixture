@@ -90,3 +90,37 @@ done
 
 pong -m Pong_mfile_SACE88.txt  -i SampleList_ind2pop.txt -p 5000 -n SampleList_ind2pop_order.txt
 pong -m Pong_mfile_SACE88_all.txt  -i SampleList_ind2pop.txt  -p 5000 -n SampleList_ind2pop_order.txt
+
+
+
+---
+250128
+
+grep -H CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88/out/log*_50_5_*K15_*.out | awk -F: '{print $1 "\t" $2 "\t" $3}' | sort -k3,3
+
+K2s1  2  Matrix_LDPrune_50_5_0.5_S1_K2.2.Q
+K3s9  3  Matrix_LDPrune_50_5_0.5_S9_K3.3.Q
+K4s4  4  Matrix_LDPrune_50_5_0.5_S4_K4.4.Q
+K5s3  5  Matrix_LDPrune_50_5_0.5_S3_K5.5.Q
+K6s8  6  Matrix_LDPrune_50_5_0.5_S8_K6.6.Q
+K7s6  7  Matrix_LDPrune_50_5_0.5_S6_K7.7.Q
+K8s4  8  Matrix_LDPrune_50_5_0.5_S4_K8.8.Q
+K9s6  9  Matrix_LDPrune_50_5_0.5_S6_K9.9.Q
+K10s7  10 Matrix_LDPrune_50_5_0.5_S7_K10.10.Q
+K11s4  11 Matrix_LDPrune_50_5_0.5_S4_K11.11.Q
+K12s3  12 Matrix_LDPrune_50_5_0.5_S3_K12.12.Q
+K13s9  13 Matrix_LDPrune_50_5_0.5_S9_K13.13.Q
+K14s2  14 Matrix_LDPrune_50_5_0.5_S2_K14.14.Q
+K15s8  15 Matrix_LDPrune_50_5_0.5_S8_K15.15.Q
+
+pong -m Pong_mfile_SACE88_lowestCV.txt  -i SampleList_ind2pop.txt  -p 5000 -n SampleList_ind2pop_order.txt
+
+
+
+
+
+
+
+
+
+
