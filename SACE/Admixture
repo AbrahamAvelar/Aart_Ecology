@@ -64,6 +64,7 @@ bcftools view -v snps Matrix_SACE203_SubSACE88.vcf | grep -v "^#" | wc -l # SON 
 
 cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88
 qsub  Remove_LD_from_VCF_SACE88.sge /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE192_NewXA/NewSACE_XA/Admixtures/SACE88/Matrix_SACE203_SubSACE88.vcf 50 5 0.5
+#108636 variants remaining
 
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/10_admixture
 module load python37/3.7.0 
