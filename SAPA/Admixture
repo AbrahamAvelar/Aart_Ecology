@@ -79,3 +79,30 @@ pong -m out/Pong_mfile_SACE47_k3-6.txt -i SAPA47.csv -p 5000
 
 pong -m out/Pong_mfile_SACE47_k3-6.txt -i sample.name.SAPA47.csv -n Ordered.SAPA47.csv -p 5000
 
+#########################
+# En el nuevo orden
+# Todas las SAPA47 de K=2 hasta K=15. Y te pediría que estuvieran en el siguiente orden:
+# West I, SouthCentral, Northeast, Others
+
+grep -H CV /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/SAPA47/out/log*_50_5_*K15_*.out | awk -F: '{print $1 "\t" $2 "\t" $3}' | sort -k3,3
+
+K2s5  2  Matrix_LDPrune_50_5_0.5_S5_K2.2.Q
+K3s9  3  Matrix_LDPrune_50_5_0.5_S9_K3.3.Q
+K4s1  4  Matrix_LDPrune_50_5_0.5_S1_K4.4.Q
+K5s10  5  Matrix_LDPrune_50_5_0.5_S10_K5.5.Q
+K6s2  6  Matrix_LDPrune_50_5_0.5_S2_K6.6.Q
+K7s2  7  Matrix_LDPrune_50_5_0.5_S2_K7.7.Q
+K8s7  8  Matrix_LDPrune_50_5_0.5_S7_K8.8.Q
+K9s10  9  Matrix_LDPrune_50_5_0.5_S10_K9.9.Q
+K10s4  10 Matrix_LDPrune_50_5_0.5_S4_K10.10.Q
+K11s1  11 Matrix_LDPrune_50_5_0.5_S1_K11.11.Q
+K12s2  12 Matrix_LDPrune_50_5_0.5_S2_K12.12.Q
+K13s8  13 Matrix_LDPrune_50_5_0.5_S8_K13.13.Q
+K14s5  14 Matrix_LDPrune_50_5_0.5_S5_K14.14.Q
+K15s9  15 Matrix_LDPrune_50_5_0.5_S9_K15.15.Q
+
+pong -m out/Pong_mfile_SACE47_k3-6.txt -i sample.name.SAPA47.csv -n Ordered.SAPA47_250219.csv -p 5000
+
+reemplazar XA096c3_Guanajuato_YMX_tank_Ferm por XA096c3_Guanajuato_YMX_NE_Ferm en sample.name.SAPA47.csv
+
+sed -E 's/ +/\t/g' out/Pong_mfile_SACE47_lowestCV.txt > out/Pong_mfile_SACE47_lowestCV_2.txt
