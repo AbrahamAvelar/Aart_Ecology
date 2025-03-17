@@ -10,5 +10,5 @@ for file in *.csv;
 /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/FST/
 
 qsub Calculate_FST.sge
-bash Extract_FST_Table.sh FST_SAPA_945945.err
-less  FST_output/fst_summary_945945.txt
+bash Extract_FST_Table.sh FST_output/FST_SAPA_945950.err
+less  Table_output/fst_summary_945950.txt
