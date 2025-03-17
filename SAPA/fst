@@ -1,0 +1,14 @@
+/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/FST/Groups
+
+for file in *.csv; 
+  do     
+  output_file="${file%.csv}.txt";
+  awk -F, 'NR > 1 {gsub(/"/, "", $1); print $1}' "$file" > "$output_file";
+  echo "Procesado: $file -> $output_file";
+  done
+
+/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA112_NewXA/SAPA110/FST/
+
+qsub Calculate_FST.sge
+bash Extract_FST_Table.sh FST_SAPA_945945.err
+less  FST_output/fst_summary_945945.txt
